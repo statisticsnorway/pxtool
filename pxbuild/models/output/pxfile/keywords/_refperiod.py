@@ -16,12 +16,12 @@ class _Refperiod(_PxValueByKey):
         super().__init__("REFPERIOD")
         self._seen_languages = {}
 
-    def set(self, refperiod: str, content: str = None, lang: str = None) -> None:
+    def set(self, refperiod: str, content: str = None, lang: str = None, code: str = "") -> None:
         """Text with information on the exact period for the statistics."""
         LineValidator.is_not_None(self._keyword, refperiod)
         LineValidator.is_string(self._keyword, refperiod)
         my_value = _PxString(refperiod)
-        my_key = _KeytypeContentLang(content, lang)
+        my_key = _KeytypeContentLang(content, lang, code)
         try:
             super().set(my_value, my_key)
         except Exception as e:

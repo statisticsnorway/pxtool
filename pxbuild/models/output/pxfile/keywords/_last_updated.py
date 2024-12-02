@@ -16,12 +16,12 @@ class _LastUpdated(_PxValueByKey):
         super().__init__("LAST-UPDATED")
         self._seen_languages = {}
 
-    def set(self, last_updated: str, content: str = None, lang: str = None) -> None:
+    def set(self, last_updated: str, content: str = None, lang: str = None, code: str = "") -> None:
         """latest update  in pxdate format"""
         LineValidator.is_not_None(self._keyword, last_updated)
         LineValidator.is_string(self._keyword, last_updated)
         my_value = _PxString(last_updated)
-        my_key = _KeytypeContentLang(content, lang)
+        my_key = _KeytypeContentLang(content, lang, code)
         try:
             super().set(my_value, my_key)
         except Exception as e:

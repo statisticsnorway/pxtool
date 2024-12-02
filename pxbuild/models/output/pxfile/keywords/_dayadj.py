@@ -16,12 +16,12 @@ class _Dayadj(_PxValueByKey):
         super().__init__("DAYADJ")
         self._seen_languages = {}
 
-    def set(self, dayadj: bool, content: str = None, lang: str = None) -> None:
+    def set(self, dayadj: bool, content: str = None, lang: str = None, code: str = "") -> None:
         """data is adjusted e.g. to take into account the number of working days"""
         LineValidator.is_not_None(self._keyword, dayadj)
         LineValidator.is_bool(self._keyword, dayadj)
         my_value = _PxBool(dayadj)
-        my_key = _KeytypeContentLang(content, lang)
+        my_key = _KeytypeContentLang(content, lang, code)
         try:
             super().set(my_value, my_key)
         except Exception as e:

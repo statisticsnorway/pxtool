@@ -16,13 +16,13 @@ class _Precision(_PxValueByKey):
         super().__init__("PRECISION")
         self._seen_languages = {}
 
-    def set(self, precision: int, variable: str, value: str, lang: str = None) -> None:
+    def set(self, precision: int, variable: str, value: str, lang: str = None, code: str = "") -> None:
         """Determines that the value shall be presented with a number of decimals that differs from the keyword SHOWDECIMALS"""
         LineValidator.is_not_None(self._keyword, precision)
         LineValidator.is_int(self._keyword, precision)
         LineValidator.in_range(1, 6, self._keyword, precision)
         my_value = _PxInt(precision)
-        my_key = _KeytypeVariableValueLang(variable, value, lang)
+        my_key = _KeytypeVariableValueLang(variable, value, lang, code)
         try:
             super().set(my_value, my_key)
         except Exception as e:

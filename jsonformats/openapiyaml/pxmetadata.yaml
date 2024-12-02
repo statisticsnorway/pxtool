@@ -66,11 +66,17 @@ components:
               type: integer
               description: "How many decimals should be stored in the PxFile. Default is the max number of decimals shown."
             statisticsId:
-               type: string
-               description: "Id of group of tables in the registry of statistics. example: '8765'"
+              type: string
+              description: "Id of group of tables in the registry of statistics. example: '8765'"
             dataFile:
-               type: string
-               description: "TODO: Er dette en filsti eller en url. required? Adress to the parquet-file with datadata"
+              type: string
+              description: "TODO: Er dette en filsti eller en url. required? Adress to the parquet-file with datadata"
+            outputFileName:
+              type: string
+              description: "Name of the output file. For multilingual defaults to tab_{tableId} or tab_{tableId}_{language} if not multilingual"
+            matrix:
+              type: string
+              description: "The matrix of the table. Defaults to outputFileName excluding language suffix"
             baseTitle:
               type: object
               additionalProperties:
@@ -95,11 +101,22 @@ components:
                 columnName:
                   type: string
                   description: name of column in dataset
+                code:
+                  type: string
+                  description: the code of the dimension( aka variable). Defaults to columName if missing
                 timePeriodFormat:
                   type: string
                   description: "example: yyyy"
+                isHeading:
+                  type: boolean
+                  description: If true the dimension is a heading otherwise it is a stub
                 label:
                   $ref: '#/components/schemas/StringByLanguage'
+                metaId:
+                  type: array
+                  description: For MetaId keyword
+                  items:
+                    type: string
             codedDimensions:
               type: array
               description: Also known as classification variables
@@ -159,11 +176,18 @@ components:
                     description: name of column in dataset
                   code:
                     type: string
-                    description: the code of the dimention( aka variable). Defaults to columName if missing
+                    description: the code of the dimension( aka variable). Defaults to columName if missing
                   isGeoVariableType:
                     type: boolean
                     default: false
                     description: Geo variable or not
+                  variableType:
+                    type: string
+                    description: Variable type
+                    default: N
+                  isHeading:
+                    type: boolean
+                    description: If true the dimension is a heading otherwise it is a stub
                   codelistId:
                     type: string
                     description: A Link to a PxCodes document
@@ -174,7 +198,6 @@ components:
                       - text
                       - code_text
                       - text_code
-                    default: text
                     description: Construct label for codelist entry as text or code or text then code or code then text
                   label:
                     $ref: '#/components/schemas/StringByLanguage'
@@ -218,10 +241,8 @@ components:
                 description: Empty if not a price
               isSeasonallyAdjusted:
                 type: boolean
-                default: false
               isWorkingdaysAdjusted:
                 type: boolean
-                default: false
               aggregationAllowed:
                 type: boolean
                 description: Is it meaningfull to sum this measurement

@@ -16,12 +16,12 @@ class _Values(_PxValueByKey):
         super().__init__("VALUES")
         self._seen_languages = {}
 
-    def set(self, values: list[str], variable: str, lang: str = None) -> None:
+    def set(self, values: list[str], variable: str, lang: str = None, code: str = "") -> None:
         """Labels of the values for the variable."""
         LineValidator.is_not_None(self._keyword, values)
         LineValidator.is_list_of_strings(self._keyword, values)
         my_value = _PxStringList(values)
-        my_key = _KeytypeVariableLang(variable, lang)
+        my_key = _KeytypeVariableLang(variable, lang, code)
         try:
             super().set(my_value, my_key)
         except Exception as e:

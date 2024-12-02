@@ -37,11 +37,13 @@ class _KeytypeLang:
 
 
 class _KeytypeVariableLang(_KeytypeLang):
+    code: str | None
     variable: str
 
-    def __init__(self, variable: str, lang: str) -> None:
+    def __init__(self, variable: str, lang: str, code: str | None = None) -> None:
         super().__init__(lang)
         self.variable = variable
+        self.code = code
 
     def __str__(self):
         if self.variable:
@@ -64,15 +66,17 @@ class _KeytypeVariableLang(_KeytypeLang):
         if self.lang:
             return self
         else:
-            return _KeytypeVariableLang(self.variable, lang)
+            return _KeytypeVariableLang(self.variable, lang, self.code)
 
 
 class _KeytypeContentLang(_KeytypeLang):
+    code: str | None
     content: str
 
-    def __init__(self, content: str, lang: str) -> None:
+    def __init__(self, content: str, lang: str, code: str | None = None) -> None:
         super().__init__(lang)
         self.content = content
+        self.code = code
 
     def __str__(self):
         if self.content:
@@ -95,15 +99,17 @@ class _KeytypeContentLang(_KeytypeLang):
         if self.lang:
             return self
         else:
-            return _KeytypeContentLang(self.content, lang)
+            return _KeytypeContentLang(self.content, lang, self.code)
 
 
 class _KeytypeVariableValueLang(_KeytypeLang):
+    code: str | None
     variable: str
     value: str
 
-    def __init__(self, variable: str, value: str, lang: str) -> None:
+    def __init__(self, variable: str, value: str, lang: str, code: str | None = None) -> None:
         super().__init__(lang)
+        self.code = code
         self.variable = variable
         self.value = value
 
@@ -128,14 +134,14 @@ class _KeytypeVariableValueLang(_KeytypeLang):
         if self.lang:
             return self
         else:
-            return _KeytypeVariableValueLang(self.variable, self.value, lang)
+            return _KeytypeVariableValueLang(self.variable, self.value, lang, self.code)
 
 
 class _KeytypeVariableLangMulti(_KeytypeVariableLang):
     counter: int
 
-    def __init__(self, variable: str, lang: str, counter: int) -> None:
-        super().__init__(variable, lang)
+    def __init__(self, variable: str, lang: str, counter: int, code: str | None = None) -> None:
+        super().__init__(variable, lang, code)
         self.counter = counter
 
     def __eq__(self, other):
@@ -150,14 +156,14 @@ class _KeytypeVariableLangMulti(_KeytypeVariableLang):
         if self.lang:
             return self
         else:
-            return _KeytypeVariableLangMulti(self.variable, lang, self.counter)
+            return _KeytypeVariableLangMulti(self.variable, lang, self.counter, self.code)
 
 
 class _KeytypeVariableValueLangMulti(_KeytypeVariableValueLang):
     counter: int
 
-    def __init__(self, variable: str, value: str, lang: str, counter: int) -> None:
-        super().__init__(variable, value, lang)
+    def __init__(self, variable: str, value: str, lang: str, counter: int, code: str | None = None) -> None:
+        super().__init__(variable, value, lang, code)
         self.counter = counter
 
     def __eq__(self, other):
@@ -177,7 +183,7 @@ class _KeytypeVariableValueLangMulti(_KeytypeVariableValueLang):
         if self.lang:
             return self
         else:
-            return _KeytypeVariableValueLangMulti(self.variable, self.value, lang, self.counter)
+            return _KeytypeVariableValueLangMulti(self.variable, self.value, lang, self.counter, self.code)
 
 
 class _KeytypeValuesLangMulti(_KeytypeLang):

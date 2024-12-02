@@ -21,7 +21,7 @@ class _Variablecode(_PxValueByKey):
         LineValidator.is_not_None(self._keyword, variablecode)
         LineValidator.is_string(self._keyword, variablecode)
         my_value = _PxString(variablecode)
-        my_key = _KeytypeVariableLang(variable, lang)
+        my_key = _KeytypeVariableLang(variable, lang, variablecode)
         try:
             super().set(my_value, my_key)
         except Exception as e:

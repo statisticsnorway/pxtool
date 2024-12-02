@@ -11,7 +11,6 @@ class TestCube2:
         path_expected = "testdata/test_cube_2/expected/"
         path_actual = "testdata/out_files/cubes_0nn/test_cube_2/"
         filelist = os.listdir(path_expected)
-
         for file in filelist:
             print(file)
 

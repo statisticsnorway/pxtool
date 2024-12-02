@@ -16,12 +16,12 @@ class _VariableType(_PxValueByKey):
         super().__init__("VARIABLE-TYPE")
         self._seen_languages = {}
 
-    def set(self, variable_type: str, variable: str, lang: str = None) -> None:
+    def set(self, variable_type: str, variable: str, lang: str = None, code: str = "") -> None:
         """Currently free-text. Suggestion: T for Time, G for Geo, C for Content"""
         LineValidator.is_not_None(self._keyword, variable_type)
         LineValidator.is_string(self._keyword, variable_type)
         my_value = _PxString(variable_type)
-        my_key = _KeytypeVariableLang(variable, lang)
+        my_key = _KeytypeVariableLang(variable, lang, code)
         try:
             super().set(my_value, my_key)
         except Exception as e:
